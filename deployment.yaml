@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: cockroach-service
+spec:
+  selector:
+    matchLabels:
+      app: cockroach-service
+  replicas: 2 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: cockroach-service
+    spec:
+      containers:
+        - name: cockroach-service
+          image: your_docker_image # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9080 # The port that the container is running on in the cluster
